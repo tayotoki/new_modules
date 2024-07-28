@@ -10,39 +10,37 @@ class InvoiceValidator:
         self.number = number
         self.type = type_
         self.len_check = self._len_check()
-        self._validated_data: Optional[str] = None
+        self._validated_data: Optional[str | int] = None
 
-    def validate(self) -> str:
+    def _validate(self) -> str:
         """Валидация номера карты/счета"""
 
-        match self.validated_data:
+        match self._validated_data:
             case None:
-                self.validated_data = self.number
-                return self.validate()
+                self._validated_data = self.number
+                return self._validate()
             case int():
-                self.validated_data = str(self.number)
-                return self.validate()
-            case str():
-                if not self.validated_data.isalnum():
+                self._validated_data = str(self.number)
+                return self._validate()
+            case str() | bytes():
+                if not self._validated_data.isalnum():
                     raise ValueError(
                         f"Номер карты/счета содержит нечисловые значения: "
                         f"{[symbol for symbol in self.validated_data if not symbol.isdigit()]}"
                     )
-                if len(self.validated_data) != self.len_check:
+                if len(self._validated_data) != self.len_check:
                     raise ValueError(
-                        f"Непредвидимая длина счета/карты: {len(self.validated_data)}, \n"
+                        f"Непредвидимая длина счета/карты: {len(self._validated_data)}, \n"
                         f"ожидается {self.len_check} для типа {self.type.name}"
                     )
             case _:
                 raise TypeError(f"Неправильный тип номера {self.number.__class__}")
 
-        return self.validated_data
+        return self._validated_data
 
     @property
     def validated_data(self) -> str:
-        if self._validated_data is None:
-            return self.validate()
-        return self._validated_data
+        return self._validate()
 
     @validated_data.setter
     def validated_data(self, value: Any) -> None:
