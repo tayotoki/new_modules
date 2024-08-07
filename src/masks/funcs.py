@@ -1,11 +1,9 @@
 from collections.abc import Generator, Sequence
 
 from .constants import InvoiceType
-from .decorators import exc_logger
 from .validators import InvoiceValidator
 
 
-@exc_logger
 def get_mask_card_number(number: int | str) -> str:
     """Возвращает номер карты в виде xxxx xx** **** xxxx"""
 
@@ -26,7 +24,6 @@ def get_mask_card_number(number: int | str) -> str:
     return masked_number
 
 
-@exc_logger
 def get_mask_account(number: str | int) -> str:
     """Возвращает номер счета в виде **xxxx"""
 

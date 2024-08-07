@@ -23,10 +23,10 @@ class InvoiceValidator:
                 self._validated_data = str(self.number)
                 return self._validate()
             case str() | bytes():
-                if not self._validated_data.isalnum():
+                if not self._validated_data.isnumeric():
                     raise ValueError(
                         f"Номер карты/счета содержит нечисловые значения: "
-                        f"{[symbol for symbol in self.validated_data if not symbol.isdigit()]}"
+                        f"{[symbol for symbol in self._validated_data if not symbol.isdigit()]}"
                     )
                 if len(self._validated_data) != self.len_check:
                     raise ValueError(
