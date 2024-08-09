@@ -3,7 +3,7 @@ from unittest import mock
 import pytest
 
 from src.masks.constants import InvoiceType
-from src.masks.funcs import get_mask_card_number, get_mask_account
+from src.masks.funcs import get_mask_account, get_mask_card_number
 
 
 @pytest.fixture

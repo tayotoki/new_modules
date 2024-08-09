@@ -1,10 +1,9 @@
 import datetime
 import functools
+import logging
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any, Optional
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -50,11 +49,10 @@ def log(filename: Optional[Path] = None) -> Callable[..., Any]:
                 (
                     write_to_file(filename, log_prefix + exception_message, e, func.__name__, args, kwargs)
                     if filename is not None
-                    else logger.error(
-                        exception_message %
-                        (e, func.__name__, args, kwargs)
-                    )
+                    else logger.error(exception_message % (e, func.__name__, args, kwargs))
                 )
                 raise
+
         return wrapper
+
     return decorator

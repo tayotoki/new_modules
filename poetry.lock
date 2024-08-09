@@ -277,6 +277,20 @@ files = [
 testing = ["pytest"]
 
 [[package]]
+name = "envparse-stubs"
+version = "0.2.2"
+description = "Type stubs for the envparse library"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "envparse-stubs-0.2.2.tar.gz", hash = "sha256:d7d73229807afa573a9b3734eb59caee176a471b11bdb6789b1870a5e8e718ce"},
+    {file = "envparse_stubs-0.2.2-py3-none-any.whl", hash = "sha256:3eb4d6f19694616c94e613c4f8d35ac7d8372dda2d65a3d89f0a25a583d2249a"},
+]
+
+[package.dependencies]
+envparse = ">=0.2,<1"
+
+[[package]]
 name = "flake8"
 version = "7.1.1"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -704,6 +718,20 @@ files = [
 ]
 
 [[package]]
+name = "types-requests"
+version = "2.32.0.20240712"
+description = "Typing stubs for requests"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "types-requests-2.32.0.20240712.tar.gz", hash = "sha256:90c079ff05e549f6bf50e02e910210b98b8ff1ebdd18e19c873cd237737c1358"},
+    {file = "types_requests-2.32.0.20240712-py3-none-any.whl", hash = "sha256:f754283e152c752e46e70942fa2a146b5bc70393522257bb85bd1ef7e019dcc3"},
+]
+
+[package.dependencies]
+urllib3 = ">=2"
+
+[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -745,4 +773,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ebb3bf74ccb2530735d3c7a781e09140993bb3772ebccb1a99bd7f9388ca800e"
+content-hash = "01e0ab662b26d0205f21955620da11685aaf8eee7fd6230a740655584a82bff9"

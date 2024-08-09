@@ -12,6 +12,8 @@ types-python-dateutil = "^2.9.0.20240316"
 pandas = "^2.2.2"
 envparse = "^0.2.0"
 requests = "^2.32.3"
+types-requests = "^2.32.0.20240712"
+envparse-stubs = "^0.2.2"
 
 [tool.poetry.group.lint.dependencies]
 flake8 = "^7.1.0"

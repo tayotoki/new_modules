@@ -1,9 +1,6 @@
 import json
-from pathlib import Path
-from typing import Optional
 import logging
-
-from src.settings import OPERATIONS_JSON
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +48,10 @@ logger = logging.getLogger(__name__)
 
 
 def parse_json_file(file_path: Path) -> list[dict]:
+    """
+    Возвращает список словарей из json-файла
+    """
+
     default_result: list = []
     try:
         with open(file_path, "r", encoding="utf-8") as file:

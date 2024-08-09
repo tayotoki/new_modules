@@ -1,21 +1,33 @@
+import logging
 from enum import Enum
-from typing import Any
+from typing import TypeVar
 
 import requests
 
-from src.settings import CONVERTER_API_URL, CONVERTER_API_KEY
+from src.settings import CONVERTER_API_KEY, CONVERTER_API_URL
+
+NestedDict = TypeVar("NestedDict", bound=dict[str, dict[str, dict[str, str]]])
+
+logger = logging.getLogger(__name__)
 
 
 class CurrencyType(Enum):
+    """Типы валюты"""
+
     USD = "USD"
     EUR = "EUR"
     RUB = "RUB"
 
 
-def rouble_converter(operation: dict[str, Any]) -> float:
+def rouble_converter(operation: NestedDict) -> float | None:
+    """
+    Если транзакция выполнена в USD или EUR
+    возвращает сумму, конвертированную в рубли
+    """
+
     amount_info = operation["operationAmount"]
     currency = amount_info["currency"]["code"]
-    amount = float(amount_info["amount"])
+    amount = amount_info["amount"]
     if currency in [CurrencyType.EUR.value, CurrencyType.USD.value]:
         try:
             params = {
@@ -35,6 +47,8 @@ def rouble_converter(operation: dict[str, Any]) -> float:
                 res_json = response.json()
 
                 if res_json["success"] is True:
-                    return res_json["result"]
-        except requests.exceptions.RequestException:
-            pass
+                    converted_amount: float = res_json["result"]
+                    return converted_amount
+        except requests.exceptions.RequestException as e:
+            logger.error(e, exc_info=True)
+    return None  # требование mypy
