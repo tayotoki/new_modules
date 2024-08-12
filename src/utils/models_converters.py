@@ -49,10 +49,9 @@ class OperationConverter:
         return self._camel_operation
 
     @staticmethod
-    def convert_string_to_snake_case(string: str) -> Optional[str]:
-        snake_string: Optional[str] = None
+    def convert_string_to_snake_case(string: str) -> str:
+        snake_string: str = ""
         if intersection := (set(string) & set(ascii_uppercase)):
-            snake_string = ""
             for char in intersection:
                 snake_string += string.replace(char, f"_{char.lower()}")
         return snake_string if snake_string else string
